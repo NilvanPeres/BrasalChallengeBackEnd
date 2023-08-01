@@ -1,0 +1,29 @@
+{
+  "name": "brasalchallengebackend",
+  "version": "1.0.0",
+  "description": "Teste",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config src/index.js dotenv_config_path=envs/local.env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NilvanPeres/BrasalChallengeBackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NilvanPeres/BrasalChallengeBackEnd/issues"
+  },
+  "homepage": "https://github.com/NilvanPeres/BrasalChallengeBackEnd#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  }
+}
