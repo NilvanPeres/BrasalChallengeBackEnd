@@ -3,6 +3,13 @@ const Task = require('./task.model');
 const taskController = {
   createTask: async (req, res) => {
     try {
+      const { body } = req.body;
+      const existingTask = await Task.findOne({ body });
+  
+      if (existingTask) {
+        return res.status(409).json({ message: 'A tarefa com esse texto já existe.' });
+      }
+      
       const task = new Task(req.body);
       await task.save();
       res.status(201).json(task);

@@ -3,8 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
-const taskRoutes = require('./routes/index');
-
+const routes = require('./routes');
 // connect to db
 connectDB();
 
@@ -16,7 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // routes
-app.use('/api', taskRoutes);
+app.use('/api', routes.taskRoutes);
+app.use('/api', routes.userRoutes);
 
 
 module.exports = app;
