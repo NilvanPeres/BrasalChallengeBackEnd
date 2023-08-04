@@ -3,38 +3,56 @@ const { validationResult } = require('express-validator');
 const router = express.Router();
 const userController = require('./user.controller');
 const userValidation = require('./user.validation');
+const authMiddleware = require('../auth/auth.middleware');
 
-
-router.post('/user', userValidation.createUser, (req, res, next) => {
+const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
   next();
-}, userController.createUser);
+};
 
-router.put('/user/:id', userValidation.updateUser, (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+const setUpdatePermission = (req, res, next) => {
+  req.permission = 'updateUser';
   next();
-}, userController.updateUser);
+};
 
-router.get('/user/:id', userValidation.getUser, (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+const setDeletePermission = (req, res, next) => {
+  req.permission = 'deleteUser';
   next();
-}, userController.getUser);
+};
 
-router.delete('/user/:id', userValidation.deleteUser, (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-}, userController.deleteUser);
+router.post(
+  '/user',
+  userValidation.createUser,
+  handleValidationErrors,
+  userController.createUser
+);
 
-module.exports = router;
+router.put(
+  '/user/:id',
+  setUpdatePermission,
+  authMiddleware,
+  userValidation.updateUser,
+  handleValidationErrors,
+  userController.updateUser
+);
+
+router.get(
+  '/user/:id',
+  userValidation.getUser,
+  handleValidationErrors,
+  userController.getUser
+);
+
+router.delete(
+  '/user/:id',
+  setDeletePermission,
+  authMiddleware,
+  userValidation.deleteUser,
+  handleValidationErrors,
+  userController.deleteUser
+);
+
+module.exports = router

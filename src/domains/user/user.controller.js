@@ -9,14 +9,14 @@ const userController = {
       await user.save();
       res.status(201).json(user);
     } catch (err) {
-      res.status(400).json({ message: 'Failed to create user', error: err.message });
+      res.status(400).json({ message: 'Falha ao criar usuário', error: err.message });
     }
   },
   getUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        return res.status(404).json({ message: 'Usuário não encontrado' });
       }
       res.status(200).json(user);
     } catch (err) {
@@ -27,18 +27,22 @@ const userController = {
       try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!user) {
-          return res.status(404).json({ message: 'User not found' });
+          return res.status(404).json({ message: 'Usuário não encontrado' });
+        }
+        if (req.body.password) {
+          user.password = await utils.encryptPassword(req.body.password);
+          await user.save();
         }
         res.status(200).json(user);
       } catch (err) {
-        res.status(400).json({ message: 'Failed to update user', error: err.message });
+        res.status(400).json({ message: 'Falha ao atualizar usuário', error: err.message });
       }
   },
   deleteUser: async (req, res) => {
     try {
       const user = await User.findByIdAndDelete(req.params.id);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        return res.status(404).json({ message: 'Usuário não encontrado' });
       }
       res.status(204).json(user);
     } catch (err) {

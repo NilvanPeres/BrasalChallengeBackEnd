@@ -2,21 +2,21 @@ const { body, param } = require('express-validator');
 
 const userValidation = {
     createUser: [
-        body('username').isString().withMessage('Username must be a string'),
-        body('password').isString().withMessage('Password must be a string'),
-        body('email').isEmail().withMessage('Email must be a valid email address')
+        body('username').isString().withMessage('Username deve ser string'),
+        body('password').isString().withMessage('Password deve ser string'),
+        body('email').isEmail().withMessage('Email deve ter um domínio válido')
     ],
     getUser: [
-        param('id').isMongoId().withMessage('id must be a valid MongoDB ObjectId')
+        param('id').isMongoId().withMessage('id deve ser MongoDB ObjectId válido')
     ],
     updateUser: [
-        param('id').isMongoId().withMessage('id must be a valid MongoDB ObjectId'),
-        body('username').optional().isString().withMessage('Username must be a string'),
-        body('password').optional().isString().withMessage('Password must be a string'),
-        body('email').optional().isEmail().withMessage('Email must be a valid email address')
+        param('id').isMongoId().withMessage('id deve ser MongoDB ObjectId válido'),
+        body('username').optional().isString().withMessage('Username deve ser string'),
+        body('password').optional().isString().withMessage('Password deve ser string'),
+        body('email').optional().isEmail().withMessage('Email deve ter um domínio válido')
     ],
     deleteUser: [
-        param('id').isMongoId().withMessage('id must be a valid MongoDB ObjectId')
+        param('id').isMongoId().withMessage('id deve ser MongoDB ObjectId válido')
     ]
 };
 
