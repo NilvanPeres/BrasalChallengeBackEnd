@@ -1,41 +1,45 @@
 const express = require('express');
 const { validationResult } = require('express-validator');
-const router = express.Router(); 
+const router = express.Router();
 const taskController = require('./task.controller');
 const taskValidation = require('./task.validation');
 
-router.post('/task', taskValidation.createTask, (req, res, next) => {
+const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
   next();
-}, taskController.createTask);
+};
 
-router.put('/task/:id', taskValidation.updateTask, (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-}, taskController.updateTask);
+router.post(
+  '/task',
+  taskValidation.createTask,
+  handleValidationErrors,
+  taskController.createTask
+);
+
+router.put(
+  '/task/:id',
+  taskValidation.updateTask,
+  handleValidationErrors,
+  taskController.updateTask
+);
 
 router.get('/tasks', taskController.getTasks);
 
-router.get('/task/:id', taskValidation.getTaskById, (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-}, taskController.getTaskById);
+router.get(
+  '/task/:id',
+  taskValidation.getTaskById,
+  handleValidationErrors,
+  taskController.getTaskById
+);
 
-router.delete('/task/:id', taskValidation.deleteTask, (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-}, taskController.deleteTask);
+router.delete(
+  '/task/:id',
+  taskValidation.deleteTask,
+  handleValidationErrors,
+  taskController.deleteTask
+);
 
 module.exports = router;

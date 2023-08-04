@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // routes
 app.use('/api', routes.taskRoutes);
 app.use('/api', routes.userRoutes);
+app.use('/api', routes.authRoutes);
 
 
 module.exports = app;
