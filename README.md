@@ -14,6 +14,12 @@ Atenção: Versão antigas do node (14-) podem apresentar alguma falha ao baixar
 
 ``` npm run dev```
 
+## Protótipo de baixa fidelidade
+
+![Screenshot from 2023-08-04 11-19-40](https://github.com/NilvanPeres/BrasalChallengeBackEnd/assets/54211866/5201c477-6fd2-4320-b72d-fd703bceb6df)
+
+
+
 Atenção: Talvez seja necessário modificações no arquivo .ENV para conectar com seu MongoDB local, trocar 0.0.0.0 por localhost
 
 4. A API pode ser testado no postman/insomnia no domínio base: http://0.0.0.0:8000/api/&{restoDaRotaQueVcDesejaUsar}
