@@ -1,20 +1,19 @@
 # BrasalChallengeBackEnd
 
 
-## Como rodar o projeto ?
+How to run the project?
 
-1. Clone o projeto via ssh/https ou baixe e extrai o arquivo .zip
-2. Baixe as depedências do projeto com 
+1. Clone the project using SSH/HTTPS or download and extract the .zip file.
+2. Install project dependencies by running:
 
-``` npm install```
+       npm install
 
-Atenção: Versão antigas do node (14-) podem apresentar alguma falha ao baixar as depedências do projeto
+Note: Older versions of Node (14-) might encounter some issues while installing project dependencies.
 
-3. Execute a aplicação com
+3. Run the application using the command:
 
-``` npm run dev```
+        npm run dev
 
+Note: You may need to make modifications to the .ENV file to connect to your local MongoDB. Replace 0.0.0.0 with localhost.
 
-Atenção: Talvez seja necessário modificações no arquivo .ENV para conectar com seu MongoDB local, trocar 0.0.0.0 por localhost
-
-4. A API pode ser testado no postman/insomnia no domínio base: http://0.0.0.0:8000/api/&{restoDaRotaQueVcDesejaUsar}
+Test the API using tools like Postman/Insomnia with the base domain: http://0.0.0.0:8000/api/{restOfTheRouteYouWantToUse}
